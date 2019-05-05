@@ -39,11 +39,7 @@ class NetworkManager {
     }
 
     companion object {
+        //pls no steal me api key plssssssss
         val API_KEY = "fbd6208e-741b-41a0-813f-2b0ffb902356"
     }
-}
-
-fun main() {
-    val nm = NetworkManager()
-    println(nm.get(CryptocurrencyService.URL_LATEST))
 }
