@@ -12,6 +12,8 @@ import android.view.ViewGroup
 import com.example.whenlambo.R
 import com.example.whenlambo.app.Injector
 import android.support.v7.widget.DividerItemDecoration
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 class HomeFragment : Fragment() {
 
@@ -38,11 +40,13 @@ class HomeFragment : Fragment() {
 
         val repository = Injector.provideCryptocurrencyRepository()
 
-        repository.getLatestCryptocurrencies { cryptocurrencies ->
-            activity?.runOnUiThread {
-
-                recyclerView.adapter = CryptocurrencyAdapter(cryptocurrencies)
+        repository.getLatestCryptocurrencies()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSuccess {
+                recyclerView.adapter = CryptocurrencyAdapter(it)
             }
-        }
+            .subscribe()
+
     }
 }
