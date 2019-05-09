@@ -10,7 +10,11 @@ import kotlin.concurrent.thread
 class CryptocurencyRepository(private val cryptocurrencyRemoteDataSource: CryptocurrencyRemoteDataSource) {
 
     fun getLatestCryptocurrencies() : Single<List<CryptocurrencyEntity?>> {
-        return Single.fromCallable{cryptocurrencyRemoteDataSource.getLatestCryptocurrencies()
-            .map { it -> it?.toCryptocurrencyEntity()}}
+        return cryptocurrencyRemoteDataSource.getLatestCryptocurrencies()
+            .flatMap {cryptos ->
+                Single.just(cryptos.map {
+                    it -> it?.toCryptocurrencyEntity()
+                })
+            }
     }
 }

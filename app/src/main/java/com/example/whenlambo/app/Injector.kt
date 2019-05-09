@@ -5,9 +5,10 @@ import com.example.whenlambo.remote.NetworkManager
 import com.example.whenlambo.remote.OkHttpNetworkManager
 import com.example.whenlambo.remote.datasource.CryptocurrencyRemoteDataSource
 import com.example.whenlambo.remote.service.CryptocurrencyService
+import com.example.whenlambo.remote.service.RetrofitCryptocurrencyService
 
 object Injector {
     fun provideCryptocurrencyRepository() : CryptocurencyRepository{
-        return CryptocurencyRepository(CryptocurrencyRemoteDataSource(CryptocurrencyService(OkHttpNetworkManager())))
+        return CryptocurencyRepository(CryptocurrencyRemoteDataSource(RetrofitCryptocurrencyService.create()))
     }
 }
