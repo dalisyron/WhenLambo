@@ -35,7 +35,6 @@ class NetworkManager {
         }
         inp.close()
         return response.toString()
-
     }
 
     companion object {

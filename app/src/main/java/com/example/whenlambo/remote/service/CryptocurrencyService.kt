@@ -1,10 +1,11 @@
 package com.example.whenlambo.remote.service
 
 import com.example.whenlambo.remote.NetworkManager
+import com.example.whenlambo.remote.OkHttpNetworkManager
 import com.example.whenlambo.remote.model.LatestCryptocurrenciesResponseDto
 import com.google.gson.Gson
 
-class CryptocurrencyService(private val networkManager: NetworkManager) {
+class CryptocurrencyService(private val networkManager: OkHttpNetworkManager) {
 
     fun getLatestCryptoCurrencies() : LatestCryptocurrenciesResponseDto {
         var rawResponse = networkManager.get(URL_LATEST)
